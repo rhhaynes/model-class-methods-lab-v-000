@@ -22,7 +22,8 @@ class Captain < ActiveRecord::Base
   end
   
   def self.non_sailors
-    self.all - sailors
+    ids = (self.all - sailors).collect{|captain| captain.id}
+    self.where({:id => ids})
   end
   
   private
